@@ -1,0 +1,58 @@
+{
+  "name": "edirectinsure-auth",
+  "version": "1.0.0",
+  "description": "EDirectInsure Auth service",
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "start": "node srv/start.js",
+    "start-dev": "node --inspect=9201 srv/start.js",
+    "test": "AUTH_PORT=7201 nyc --check-coverage --lines 80 --functions 80 --reporter=html --reporter=text mocha -S test/*.test.js --exit --timeout 555555",
+    "test-debugger": "AUTH_PORT=7201 mocha --inspect-brk=9201 -S test/*.test.js --exit",
+    "fixStyle": "./node_modules/eslint/bin/eslint.js ./ --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./node_modules/eslint/bin/eslint.js ./",
+      "pre-push": "npm test"
+    }
+  },
+  "nyc": {
+    "exclude": [
+      "coverage",
+      "test",
+      "srv"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/amorimdev/edirectinsure-auth.git"
+  },
+  "author": "Jhonatan Amorim <amorim.dev@gmail.com>",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/amorimdev/edirectinsure-auth#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "redis": "^2.8.0",
+    "seneca": "^3.12.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^2.3.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
+  }
+}
