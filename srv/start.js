@@ -14,16 +14,18 @@ seneca.use(Logout)
 seneca.use(ValidToken)
 
 seneca.listen({
-  type: process.env.AUTH_PROTOCOL || 'http',
+  type: process.env.AUTH_TRANSPORT || 'http',
   host: process.env.AUTH_HOST || '0.0.0.0',
   port: process.env.AUTH_PORT || process.env.PORT || 8201,
+  protocol: process.env.AUTH_PROTOCOL || 'http',
   pin: { role: 'auth', cmd: '*' }
 })
 
 seneca.client({
-  type: process.env.USER_PROTOCOL || 'http',
+  type: process.env.USER_TRANSPORT || 'http',
   host: process.env.USER_HOST || '0.0.0.0',
   port: process.env.USER_PORT || 8202,
+  protocol: process.env.USER_PROTOCOL || 'http',
   pin: { role: 'user', cmd: 'select' }
 })
 
