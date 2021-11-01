@@ -16,7 +16,7 @@ seneca.use(ValidToken)
 seneca.listen({
   type: process.env.AUTH_PROTOCOL || 'http',
   host: process.env.AUTH_HOST || '0.0.0.0',
-  port: process.env.AUTH_PORT || 8201,
+  port: process.env.AUTH_PORT || process.env.PORT || 8201,
   pin: { role: 'auth', cmd: '*' }
 })
 
