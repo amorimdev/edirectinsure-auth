@@ -27,8 +27,9 @@ module.exports = function ValidToken () {
         const client = redis.createClient({
           url: process.env.REDIS_URL || 'redis://localhost:6379'
         })
+        const token = params.token.replace('Bearer ', '')
 
-        client.exists(params.token, (err, result) => {
+        client.exists(token, (err, result) => {
           if (err) {
             seneca.log.fatal(LOG_TAG, err.message || err)
             return reject(err)
