@@ -27,8 +27,9 @@ module.exports = async function Logout () {
         const client = redis.createClient({
           url: process.env.REDIS_URL || 'redis://localhost:6379'
         })
+        const token = params.authorization.replace('Bearer ', '')
 
-        client.del(params.authorization, (err, result) => {
+        client.del(token, (err, result) => {
           if (err) {
             seneca.log.fatal(LOG_TAG, err.message || err)
             return reject(err)
